@@ -1,4 +1,4 @@
-package com.zero.ioc.entity;
+package com.zero.ioc.entity01;
 
 public class Hello {
 

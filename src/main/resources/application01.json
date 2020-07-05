@@ -1,7 +1,7 @@
 [
   {
     "name": "hello",
-    "className": "com.zero.ioc.entity.Hello"
+    "className": "com.zero.ioc.entity01.Hello"
   }
 ]
 
