@@ -1,0 +1,32 @@
+[
+  {
+    "name": "huawei",
+    "className": "com.zero.ioc.entity03.Phone",
+    "constructorArgList": [
+      {
+        "index": 1,
+        "name": "phoneName",
+        "value": "huawei"
+      }
+    ]
+  },
+  {
+    "name": "xiaoming",
+    "className": "com.zero.ioc.entity03.Person",
+    "constructorArgList": [
+      {
+        "index": 1,
+        "name": "name",
+        "value": "小明"
+      },
+      {
+        "index": 2,
+        "name": "phone",
+        "ref": "huawei"
+      }
+    ]
+  }
+]
+
+
+
