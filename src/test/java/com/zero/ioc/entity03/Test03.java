@@ -1,8 +1,9 @@
 package com.zero.ioc.entity03;
 
-import com.sun.tools.javac.util.Assert;
 import com.zero.ioc.core.JsonApplicationContext;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class Test03 {
 
@@ -13,11 +14,11 @@ public class Test03 {
         Person person = (Person) jsonApplicationContext.getBean("xiaoming");
         String name = person.getName();
         String phoneName = person.getPhone().getPhoneName();
-        Assert.check("小明".equals(name));
-        Assert.check("huawei".equals(phoneName));
+        assertEquals("小明", name);
+        assertEquals("huawei", phoneName);
         String res = person.hello("zero");
         System.out.println("res = " + res);
-        Assert.check(res.equals("小明使用huawei给zero打电话"));
+        assertEquals("小明使用huawei给zero打电话", res);
     }
 
 }

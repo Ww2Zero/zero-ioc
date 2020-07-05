@@ -1,7 +1,6 @@
 package com.zero.ioc.test;
 
 
-import com.sun.tools.javac.util.Assert;
 import com.zero.ioc.test.entity.CGLIB.Son;
 import com.zero.ioc.test.entity.CGLIB.Worker;
 import com.zero.ioc.test.entity.JDK.Cat;
@@ -14,6 +13,8 @@ import org.junit.Test;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import static org.junit.Assert.assertEquals;
+
 
 public class InstanceTest {
 
@@ -22,7 +23,7 @@ public class InstanceTest {
         Dog dog = Dog.class.newInstance();
         String zero = dog.hello("zero");
         System.out.println("zero = " + zero);
-        Assert.check(zero.equals("汪汪汪～zero"));
+        assertEquals("汪汪汪～zero", zero);
     }
 
     @Test
@@ -31,25 +32,25 @@ public class InstanceTest {
         Dog dog = constructor.newInstance(null);
         String zero = dog.hello("zero");
         System.out.println("zero = " + zero);
-        Assert.check(zero.equals("汪汪汪～zero"));
+        assertEquals("汪汪汪～zero", zero);
     }
 
     @Test
     public void TestJdkWithConstructor() throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        Constructor<Cat> constructor = Cat.class.getConstructor(new Class[]{String.class});
-        Cat cat = constructor.newInstance(new Object[]{"小花猫"});
+        Constructor<Cat> constructor = Cat.class.getConstructor(String.class);
+        Cat cat = constructor.newInstance("小花猫");
         String zero = cat.hello("zero");
         System.out.println("zero = " + zero);
-        Assert.check(zero.equals("小花猫: 喵喵喵～zero"));
+        assertEquals("小花猫: 喵喵喵～zero", zero);
     }
 
     @Test
     public void TestJdkWithConstructor2() throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        Constructor<Pig> constructor = Pig.class.getConstructor(new Class[]{String.class});
-        Pig pig = constructor.newInstance(new Object[]{"佩奇"});
+        Constructor<Pig> constructor = Pig.class.getConstructor(String.class);
+        Pig pig = constructor.newInstance("佩奇");
         String zero = pig.hello("zero");
         System.out.println("zero = " + zero);
-        Assert.check(zero.equals("佩奇哈哈哈～zero"));
+        assertEquals("佩奇哈哈哈～zero", zero);
     }
 
     @Test
@@ -60,7 +61,7 @@ public class InstanceTest {
         Son son = (Son) enhancer.create();
         String q = son.hello("Q");
         System.out.println("q = " + q);
-        Assert.check(q.equals("SonhelloQ"));
+        assertEquals("SonhelloQ", q);
     }
 
 
@@ -72,6 +73,6 @@ public class InstanceTest {
         Worker worker = (Worker) enhancer.create(new Class[]{String.class}, new Object[]{"faker"});
         String r = worker.hello("R");
         System.out.println("r = " + r);
-        Assert.check(r.equals("faker is worker ,R"));
+        assertEquals("faker is worker ,R", r);
     }
 }

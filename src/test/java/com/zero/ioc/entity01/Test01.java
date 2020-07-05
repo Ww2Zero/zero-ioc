@@ -1,8 +1,10 @@
 package com.zero.ioc.entity01;
 
-import com.sun.tools.javac.util.Assert;
+
 import com.zero.ioc.core.JsonApplicationContext;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class Test01 {
 
@@ -13,6 +15,6 @@ public class Test01 {
         Hello hello = (Hello) jsonApplicationContext.getBean("hello");
         String res = hello.hello("zero");
         System.out.println("res = " + res);
-        Assert.check(res.equals("hello zero"));
+        assertEquals("hello zero", res);
     }
 }

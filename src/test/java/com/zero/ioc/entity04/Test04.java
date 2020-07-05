@@ -1,8 +1,9 @@
 package com.zero.ioc.entity04;
 
-import com.sun.tools.javac.util.Assert;
 import com.zero.ioc.core.JsonApplicationContext;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class Test04 {
@@ -14,10 +15,10 @@ public class Test04 {
         Student student = (Student) jsonApplicationContext.getBean("xiaoming");
         String name = student.getUserName();
         String phoneName = student.getPhone().getPhoneName();
-        Assert.check("小明".equals(name));
-        Assert.check("huawei".equals(phoneName));
+        assertEquals("小明", name);
+        assertEquals("huawei", phoneName);
         String res = student.hello("zero");
         System.out.println("res = " + res);
-        Assert.check(res.equals("小明 huawei hello zero"));
+        assertEquals("小明 huawei hello zero", res);
     }
 }
