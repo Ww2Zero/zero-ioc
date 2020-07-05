@@ -2,14 +2,14 @@ package com.zero.ioc.test;
 
 
 import com.sun.tools.javac.util.Assert;
-import com.zero.ioc.test.entity.CGLIB.Pig;
 import com.zero.ioc.test.entity.CGLIB.Son;
+import com.zero.ioc.test.entity.CGLIB.Worker;
 import com.zero.ioc.test.entity.JDK.Cat;
 import com.zero.ioc.test.entity.JDK.Dog;
-import com.zero.ioc.test.entity.Worker;
+import com.zero.ioc.test.entity.JDK.Pig;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

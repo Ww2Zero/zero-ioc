@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BeanDefinition {
 
-    private String name;
+    private String beanName;
     private String className;
     private String interfaceName;
 
@@ -17,12 +17,12 @@ public class BeanDefinition {
     private List<PropertyArg> propertyArgList;
 
 
-    public String getName() {
-        return name;
+    public String getBeanName() {
+        return beanName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
     }
 
     public String getClassName() {

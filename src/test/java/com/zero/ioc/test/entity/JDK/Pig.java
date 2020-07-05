@@ -1,6 +1,5 @@
-package com.zero.ioc.test.entity.CGLIB;
+package com.zero.ioc.test.entity.JDK;
 
-import com.zero.ioc.test.entity.JDK.Hello;
 
 public class Pig implements Hello {
 

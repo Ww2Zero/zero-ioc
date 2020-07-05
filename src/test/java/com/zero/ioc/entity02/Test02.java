@@ -2,10 +2,15 @@ package com.zero.ioc.entity02;
 
 import com.sun.tools.javac.util.Assert;
 import com.zero.ioc.core.JsonApplicationContext;
+import org.junit.Test;
 
-public class Test {
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
+public class Test02 {
+
+    @Test
+    public void test() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException, IOException {
         JsonApplicationContext jsonApplicationContext = new JsonApplicationContext("application02.json");
         Person person = (Person) jsonApplicationContext.getBean("person");
         String name = person.getName();

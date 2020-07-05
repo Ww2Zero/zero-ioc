@@ -1,6 +1,6 @@
 [
   {
-    "name": "huawei",
+    "beanName": "huawei",
     "className": "com.zero.ioc.entity03.Phone",
     "constructorArgList": [
       {
@@ -11,7 +11,7 @@
     ]
   },
   {
-    "name": "xiaoming",
+    "beanName": "xiaoming",
     "className": "com.zero.ioc.entity03.Person",
     "constructorArgList": [
       {

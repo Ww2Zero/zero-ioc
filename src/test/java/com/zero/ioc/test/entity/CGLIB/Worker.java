@@ -1,6 +1,5 @@
-package com.zero.ioc.test.entity;
+package com.zero.ioc.test.entity.CGLIB;
 
-import com.zero.ioc.test.entity.CGLIB.Person;
 
 public class Worker extends Person {
 

@@ -1,6 +1,6 @@
 [
   {
-    "name": "hello",
+    "beanName": "hello",
     "className": "com.zero.ioc.entity01.Hello"
   }
 ]
