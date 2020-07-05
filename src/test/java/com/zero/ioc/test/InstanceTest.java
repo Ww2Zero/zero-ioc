@@ -9,7 +9,7 @@ import com.zero.ioc.test.entity.JDK.Dog;
 import com.zero.ioc.test.entity.Worker;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
