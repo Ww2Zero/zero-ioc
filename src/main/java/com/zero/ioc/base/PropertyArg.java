@@ -4,9 +4,9 @@ public class PropertyArg {
 
     private String name;
 
-    private String value;
+    private Object value;
 
-    private String typeName;
+    private String ref;
 
     public String getName() {
         return name;
@@ -16,7 +16,7 @@ public class PropertyArg {
         this.name = name;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
@@ -24,11 +24,11 @@ public class PropertyArg {
         this.value = value;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getRef() {
+        return ref;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setRef(String ref) {
+        this.ref = ref;
     }
 }

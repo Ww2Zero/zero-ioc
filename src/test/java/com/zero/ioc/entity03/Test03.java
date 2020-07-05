@@ -4,13 +4,10 @@ import com.sun.tools.javac.util.Assert;
 import com.zero.ioc.core.JsonApplicationContext;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-
 public class Test03 {
 
     @Test
-    public void test() throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, IOException {
+    public void test() throws Exception {
 
         JsonApplicationContext jsonApplicationContext = new JsonApplicationContext("application03.json");
         Person person = (Person) jsonApplicationContext.getBean("xiaoming");

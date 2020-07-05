@@ -1,0 +1,30 @@
+[
+  {
+    "beanName": "huawei",
+    "className": "com.zero.ioc.entity04.Phone",
+    "constructorArgList": [
+      {
+        "index": 1,
+        "name": "phoneName",
+        "value": "huawei"
+      }
+    ]
+  },
+  {
+    "beanName": "xiaoming",
+    "className": "com.zero.ioc.entity04.Student",
+    "propertyArgList": [
+      {
+        "name": "userName",
+        "value": "小明"
+      },
+      {
+        "name": "phone",
+        "ref": "huawei"
+      }
+    ]
+  }
+]
+
+
+
