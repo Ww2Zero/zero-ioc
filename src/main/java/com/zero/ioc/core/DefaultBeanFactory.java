@@ -9,9 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -21,20 +19,33 @@ import java.util.stream.Collectors;
 public class DefaultBeanFactory implements BeanFactory {
 
     private final ConcurrentHashMap<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, Object> beanMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Object> singletonObjects = new ConcurrentHashMap<>();
+    private final Map<String, Object> earlySingletonObjects = new HashMap<String, Object>(16);
 
     @Override
     public Object getBean(String beanName) throws Exception {
 
-        Object bean = beanMap.get(beanName);
+        Object bean = singletonObjects.get(beanName);
         if (!Objects.isNull(bean)) {
             return bean;
+        }
+        Object earlyBean = earlySingletonObjects.get(beanName);
+        if (earlyBean != null) {
+            throw new IllegalArgumentException("创建" + beanName + "检查到循环依赖，请检查配置");
         }
 
         BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
         bean = createBean(beanDefinition);
-        populateBean(bean, beanDefinition);
-        beanMap.put(beanName, bean);
+        if (bean != null) {
+            //为了解决循环依赖，先添加到早期单例中
+            earlySingletonObjects.put(beanName, bean);
+
+            populateBean(bean, beanDefinition);
+            singletonObjects.put(beanName, bean);
+            //从早期单例Map中移除
+            earlySingletonObjects.remove(beanName);
+        }
+
         return bean;
     }
 

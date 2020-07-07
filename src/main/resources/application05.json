@@ -1,0 +1,47 @@
+[
+  {
+    "beanName": "aObject",
+    "className": "com.zero.ioc.entity05.AObject",
+    "propertyArgList": [
+      {
+        "name": "bObject",
+        "ref": "bObject"
+      },
+      {
+        "name": "name",
+        "value": "小A"
+      }
+    ]
+  },
+  {
+    "beanName": "cObject",
+    "className": "com.zero.ioc.entity05.CObject",
+    "propertyArgList": [
+      {
+        "name": "aObject",
+        "ref": "aObject"
+      },
+      {
+        "name": "name",
+        "value": "小C"
+      }
+    ]
+  },
+  {
+    "beanName": "bObject",
+    "className": "com.zero.ioc.entity05.BObject",
+    "propertyArgList": [
+      {
+        "name": "cObject",
+        "ref": "cObject"
+      },
+      {
+        "name": "name",
+        "value": "小B"
+      }
+    ]
+  }
+]
+
+
+
