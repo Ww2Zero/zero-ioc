@@ -3,7 +3,7 @@ package com.zero.ioc.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zero.ioc.base.BeanDefinition;
+import com.zero.ioc.beans.factory.BeanDefinition;
 
 import java.io.IOException;
 import java.io.InputStream;

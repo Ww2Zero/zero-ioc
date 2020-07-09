@@ -1,5 +1,8 @@
-package com.zero.ioc.base;
+package com.zero.ioc.beans.factory;
 
+/**
+ * @author zero
+ */
 public class PropertyArg {
 
     private String name;

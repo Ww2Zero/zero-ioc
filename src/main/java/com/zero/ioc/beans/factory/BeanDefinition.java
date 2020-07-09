@@ -1,18 +1,19 @@
-package com.zero.ioc.base;
+package com.zero.ioc.beans.factory;
 
 import java.util.List;
 
 /**
  * @author zero
  */
-
-
 public class BeanDefinition {
+    public static final String SCOPE_SINGLETON = "singleton";
+    public static final String SCOPE_PROTOTYPE = "prototype";
+    public static final String SCOPE_DEFAULT = "";
 
     private String beanName;
     private String className;
     private String interfaceName;
-
+    private String scope;
     private List<ConstructorArg> constructorArgList;
     private List<PropertyArg> propertyArgList;
 
@@ -23,6 +24,22 @@ public class BeanDefinition {
 
     public void setBeanName(String beanName) {
         this.beanName = beanName;
+    }
+
+    public boolean isSingleton() {
+        return SCOPE_SINGLETON.equals(scope);
+    }
+
+    public boolean isPrototype() {
+        return SCOPE_PROTOTYPE.equals(scope);
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 
     public String getClassName() {

@@ -1,6 +1,6 @@
 package com.zero.ioc.core;
 
-import com.zero.ioc.base.BeanDefinition;
+import com.zero.ioc.beans.factory.BeanDefinition;
 import com.zero.ioc.utils.JsonUtils;
 
 import java.io.IOException;

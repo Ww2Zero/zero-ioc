@@ -1,8 +1,11 @@
-package com.zero.ioc.base;
+package com.zero.ioc.beans.factory;
 
 
 import java.util.Objects;
 
+/**
+ * @author zero
+ */
 public class ConstructorArg {
 
     private int index;

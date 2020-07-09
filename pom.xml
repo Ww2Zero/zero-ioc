@@ -71,12 +71,6 @@
                     <encoding>UTF-8</encoding><!-- 字符集编码 -->
                     <verbose>true</verbose>
                     <showWarnings>true</showWarnings>
-                    <!--                    <compilerArguments>-->
-                    <!--                        &lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-                    <!--&lt;!&ndash;                        <bootclasspath>${JAVA_HOME}/jre/lib/rt.jar${path.separator}${JAVA_HOME}/jre/lib/jce.jar</bootclasspath>&ndash;&gt;-->
-                    <!--&lt;!&ndash;                        <bootclasspath>${java.home}/lib/rt.jar:${java.home}/lib/jce.jar</bootclasspath>&ndash;&gt;-->
-                    <!--&lt;!&ndash;                        <bootclasspath>${java.home}/jre/lib/rt.jar:${java.home}/lib/tools.jar:${java.home}/jre/lib/jce.jar</bootclasspath>&ndash;&gt;-->
-                    <!--                    </compilerArguments>-->
                 </configuration>
             </plugin>
         </plugins>

@@ -1,0 +1,19 @@
+[
+  {
+    "beanName": "xiaoming",
+    "className": "com.zero.ioc.entity06.Student",
+    "propertyArgList": [
+      {
+        "name": "userName",
+        "value": "小明"
+      },
+      {
+        "name": "age",
+        "value": "12"
+      }
+    ]
+  }
+]
+
+
+

@@ -1,8 +1,9 @@
 package com.zero.ioc.core;
 
-import com.zero.ioc.base.BeanDefinition;
-import com.zero.ioc.base.ConstructorArg;
-import com.zero.ioc.base.PropertyArg;
+import com.zero.ioc.beans.factory.BeanDefinition;
+import com.zero.ioc.beans.factory.ConstructorArg;
+import com.zero.ioc.beans.factory.PropertyArg;
+import com.zero.ioc.beans.type.SimpleTypeConverter;
 import com.zero.ioc.utils.BeanUtils;
 import com.zero.ioc.utils.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -62,22 +63,28 @@ public class DefaultBeanFactory implements BeanFactory {
                 } else if (StringUtils.isNotEmpty(ref)) {
                     injectValue = getBean(ref);
                 }
-                Method method = setPropertyValue(beanDefinition, name, injectValue);
-                method.invoke(bean, injectValue);
+                setPropertyValue(bean, beanDefinition, name, injectValue);
+
             }
         }
     }
 
-    private Method setPropertyValue(BeanDefinition bd, String propertyName, Object injectValue) throws Exception {
+    private void setPropertyValue(Object bean, BeanDefinition bd, String propertyName, Object injectValue) throws Exception {
         Class beanClass = Class.forName(bd.getClassName());
-        Class injectClazz = injectValue.getClass();
-        Class supClass = injectValue.getClass().getSuperclass();
-        if (supClass != null && supClass != Object.class) {
-            injectClazz = supClass;
-        }
         propertyName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-        Method setter = beanClass.getMethod("set" + propertyName, injectClazz);
-        return setter;
+        // 默认采用set方法注入，bean必须实现setter方法
+        String propertySetMethodName = "set" + propertyName;
+        for (Method method : beanClass.getMethods()) {
+            if (method.getName().equals(propertySetMethodName)) {
+                Class<?>[] parameterTypes = method.getParameterTypes();
+                if (parameterTypes.length == 1) {
+                    SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
+                    Object value = simpleTypeConverter.convertIfNecessary(injectValue, parameterTypes[0]);
+                    method.invoke(bean, value);
+                    break;
+                }
+            }
+        }
     }
 
     private Object createBean(BeanDefinition beanDefinition) throws Exception {
@@ -87,6 +94,7 @@ public class DefaultBeanFactory implements BeanFactory {
         List<ConstructorArg> constructorArgList = beanDefinition.getConstructorArgList();
         if (constructorArgList != null && !constructorArgList.isEmpty()) {
             List<Object> constructorArgValueList = new LinkedList<>();
+            // todo refactor
             for (ConstructorArg constructorArg : constructorArgList) {
                 if (constructorArg.getValue() != null) {
                     constructorArgValueList.add(constructorArg.getValue());
