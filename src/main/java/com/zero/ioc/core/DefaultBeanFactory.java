@@ -1,5 +1,6 @@
 package com.zero.ioc.core;
 
+import com.zero.ioc.beans.exception.CircularDependenceException;
 import com.zero.ioc.beans.factory.BeanDefinition;
 import com.zero.ioc.beans.factory.ConstructorArg;
 import com.zero.ioc.beans.factory.PropertyArg;
@@ -26,17 +27,23 @@ public class DefaultBeanFactory implements BeanFactory {
     @Override
     public Object getBean(String beanName) throws Exception {
 
-        Object bean = singletonObjects.get(beanName);
-        if (!Objects.isNull(bean)) {
-            return bean;
+        BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
+        if (beanDefinition.isSingleton()) {
+            Object bean = singletonObjects.get(beanName);
+            if (!Objects.isNull(bean)) {
+                return bean;
+            }
         }
+        return createBean(beanName, beanDefinition);
+
+    }
+
+    private Object createBean(String beanName, BeanDefinition beanDefinition) throws Exception {
         Object earlyBean = earlySingletonObjects.get(beanName);
         if (earlyBean != null) {
-            throw new IllegalArgumentException("创建" + beanName + "检查到循环依赖，请检查配置");
+            throw new CircularDependenceException("创建" + beanName + "检查到循环依赖，请检查配置");
         }
-
-        BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
-        bean = createBean(beanDefinition);
+        Object bean = createBean(beanDefinition);
         if (bean != null) {
             //为了解决循环依赖，先添加到早期单例中
             earlySingletonObjects.put(beanName, bean);
