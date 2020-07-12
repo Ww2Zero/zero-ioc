@@ -1,6 +1,7 @@
 package com.zero.ioc.beans.factory;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zero
@@ -16,7 +17,15 @@ public class BeanDefinition {
     private String scope;
     private List<ConstructorArg> constructorArgList;
     private List<PropertyArg> propertyArgList;
+    private boolean lazyInit;
 
+    public boolean isLazyInit() {
+        return lazyInit;
+    }
+
+    public void setLazyInit(boolean lazyInit) {
+        this.lazyInit = lazyInit;
+    }
 
     public String getBeanName() {
         return beanName;
@@ -32,6 +41,10 @@ public class BeanDefinition {
 
     public boolean isPrototype() {
         return SCOPE_PROTOTYPE.equals(scope);
+    }
+
+    public boolean isDefault() {
+        return SCOPE_DEFAULT.equals(scope) || Objects.isNull(scope);
     }
 
     public String getScope() {

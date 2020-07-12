@@ -28,6 +28,20 @@
       }
     ],
     "scope": "prototype"
+  },
+  {
+    "beanName": "xiaohan",
+    "className": "com.zero.ioc.entity07.Student",
+    "propertyArgList": [
+      {
+        "name": "userName",
+        "value": "小韩"
+      },
+      {
+        "name": "age",
+        "value": "22"
+      }
+    ]
   }
 ]
 

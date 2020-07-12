@@ -32,4 +32,16 @@ public class Test07 {
         assertNotEquals(student01, student02);
     }
 
+    @Test
+    public void TestDefaultScope() throws Exception {
+        JsonApplicationContext jsonApplicationContext = new JsonApplicationContext("application07.json");
+        Student student01 = (Student) jsonApplicationContext.getBean("xiaohan");
+        Student student02 = (Student) jsonApplicationContext.getBean("xiaohan");
+        assertEquals("小韩", student01.getUserName());
+        assertEquals(22, student01.getAge());
+        assertEquals("小韩", student02.getUserName());
+        assertEquals(22, student02.getAge());
+        assertEquals(student01, student02);
+    }
+
 }

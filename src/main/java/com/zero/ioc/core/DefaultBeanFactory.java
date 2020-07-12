@@ -28,7 +28,7 @@ public class DefaultBeanFactory implements BeanFactory {
     public Object getBean(String beanName) throws Exception {
 
         BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
-        if (beanDefinition.isSingleton()) {
+        if (beanDefinition.isSingleton() || beanDefinition.isDefault()) {
             Object bean = singletonObjects.get(beanName);
             if (!Objects.isNull(bean)) {
                 return bean;
@@ -117,7 +117,10 @@ public class DefaultBeanFactory implements BeanFactory {
         return BeanUtils.createInstance(clazz, null, null);
     }
 
-    protected void registerBean(String name, BeanDefinition beanDefinition) {
+    protected void registerBean(String name, BeanDefinition beanDefinition) throws Exception {
+        if (!beanDefinition.isLazyInit() && beanDefinition.isSingleton()) {
+            createBean(name, beanDefinition);
+        }
         beanDefinitionMap.put(name, beanDefinition);
     }
 }
