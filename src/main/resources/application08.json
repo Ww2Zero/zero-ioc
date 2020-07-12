@@ -1,0 +1,50 @@
+[
+  {
+    "beanName": "xiaoming",
+    "className": "com.zero.ioc.entity08.Student",
+    "propertyArgList": [
+      {
+        "name": "userName",
+        "value": "小明"
+      },
+      {
+        "name": "age",
+        "value": "12"
+      }
+    ],
+    "scope": "singleton",
+    "lazyInit": "true"
+  },
+  {
+    "beanName": "xiaohua",
+    "className": "com.zero.ioc.entity08.Student",
+    "propertyArgList": [
+      {
+        "name": "userName",
+        "value": "小华"
+      },
+      {
+        "name": "age",
+        "value": "22"
+      }
+    ],
+    "lazyInit": "false"
+  },
+  {
+    "beanName": "xiaohan",
+    "className": "com.zero.ioc.entity08.Student",
+    "propertyArgList": [
+      {
+        "name": "userName",
+        "value": "小韩"
+      },
+      {
+        "name": "age",
+        "value": "23"
+      }
+    ]
+  }
+]
+
+
+

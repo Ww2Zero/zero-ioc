@@ -7,6 +7,6 @@
 - [X] 对象循环依赖检查
 - [X] 支持数值类型的setter注入
 - [X] 支持单例和多例[scope]
+- [X] 支持懒加载lazy-init
 - [] 支持List的注入
 - [] 支持Map的注入
-- [] 支持懒加载lazy-init
