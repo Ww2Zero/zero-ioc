@@ -53,7 +53,7 @@ public class DefaultBeanFactory implements BeanFactory {
         try {
             bean = createBean(beanDefinition);
         } catch (Exception e) {
-            throw new BeanCreationException(beanName);
+            throw new BeanCreationException(beanName, e);
         }
         if (bean != null) {
             //为了解决循环依赖，先添加到早期单例中

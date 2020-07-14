@@ -1,16 +1,35 @@
 [
   {
-    "beanName": "hello",
-    "className": "com.zero.ioc.entity01.Hello"
-  },
-  {
     "beanName": "person",
     "className": "com.zero.ioc.entity02.Person",
     "constructorArgList": [
       {
-        "index": 1,
         "name": "name",
         "value": "小明"
+      }
+    ]
+  },
+  {
+    "beanName": "person0x01",
+    "className": "com.zero.ioc.entity02.Person",
+    "constructorArgList": [
+      {
+        "name": "name",
+        "value": "小明0x01"
+      }
+    ]
+  },
+  {
+    "beanName": "person0x02",
+    "className": "com.zero.ioc.entity02.Person",
+    "constructorArgList": [
+      {
+        "name": "name",
+        "value": "小明0x02"
+      },
+      {
+        "name": "userName",
+        "value": "小明0x02"
       }
     ]
   }
