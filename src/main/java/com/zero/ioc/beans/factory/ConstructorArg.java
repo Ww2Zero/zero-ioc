@@ -4,22 +4,25 @@ package com.zero.ioc.beans.factory;
 import java.util.Objects;
 
 /**
+ * 构造函数的参数
+ * 构造函数的入参暂时只支持名称匹配
+ *
  * @author zero
  */
 public class ConstructorArg {
 
-    private int index;
-    private String ref;
+    /**
+     * 构造函数参数名称
+     */
     private String name;
+    /**
+     * 构造函数参数为引用 指向另外一个bean
+     */
+    private String ref;
+    /**
+     * 构造函数参数 值
+     */
     private Object value;
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 
     public String getRef() {
         return ref;
@@ -54,21 +57,20 @@ public class ConstructorArg {
             return false;
         }
         ConstructorArg that = (ConstructorArg) o;
-        return index == that.index &&
+        return
                 Objects.equals(ref, that.ref) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(value, that.value);
+                        Objects.equals(name, that.name) &&
+                        Objects.equals(value, that.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, ref, name, value);
+        return Objects.hash(ref, name, value);
     }
 
     @Override
     public String toString() {
         return "ConstructorArg{" +
-                "index=" + index +
                 ", ref='" + ref + '\'' +
                 ", name='" + name + '\'' +
                 ", value=" + value +

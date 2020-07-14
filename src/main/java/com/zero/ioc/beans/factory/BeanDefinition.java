@@ -7,16 +7,43 @@ import java.util.Objects;
  * @author zero
  */
 public class BeanDefinition {
+
+    /**
+     * 单例bean
+     */
     public static final String SCOPE_SINGLETON = "singleton";
+    /**
+     * 多例的bean
+     */
     public static final String SCOPE_PROTOTYPE = "prototype";
+    /**
+     * 默认的scope
+     */
     public static final String SCOPE_DEFAULT = "";
 
+    /**
+     * bean的名称
+     */
     private String beanName;
+    /**
+     * bean对应的class路径
+     */
     private String className;
-    private String interfaceName;
+    /**
+     *
+     */
     private String scope;
+    /**
+     * 构造函数参数列表
+     */
     private List<ConstructorArg> constructorArgList;
+    /**
+     * 类内变量参数列表
+     */
     private List<PropertyArg> propertyArgList;
+    /**
+     * 懒加载标志
+     */
     private boolean lazyInit;
 
     public boolean isLazyInit() {
@@ -61,14 +88,6 @@ public class BeanDefinition {
 
     public void setClassName(String className) {
         this.className = className;
-    }
-
-    public String getInterfaceName() {
-        return interfaceName;
-    }
-
-    public void setInterfaceName(String interfaceName) {
-        this.interfaceName = interfaceName;
     }
 
     public List<ConstructorArg> getConstructorArgList() {
