@@ -1,5 +1,6 @@
 package com.zero.ioc.core;
 
+import com.zero.ioc.beans.exception.BeanDefinitionStoreException;
 import com.zero.ioc.beans.factory.BeanDefinition;
 import com.zero.ioc.utils.JsonUtils;
 
@@ -14,15 +15,19 @@ public class JsonApplicationContext extends DefaultBeanFactory {
 
     private String jsonFileName;
 
-    public JsonApplicationContext(String jsonFileName) throws Exception {
+    public JsonApplicationContext(String jsonFileName) {
         this.jsonFileName = jsonFileName;
-        loadFile();
+        loadJsonFile();
     }
 
-    private void loadFile() throws Exception {
-
+    private void loadJsonFile() {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(jsonFileName);
-        List<BeanDefinition> beanDefinitions = JsonUtils.jsonToBeanDefinition(is);
+        List<BeanDefinition> beanDefinitions = null;
+        try {
+            beanDefinitions = JsonUtils.jsonToBeanDefinition(is);
+        } catch (Exception e) {
+            throw new BeanDefinitionStoreException("load json fail", e);
+        }
         if (beanDefinitions != null && !beanDefinitions.isEmpty()) {
             for (BeanDefinition beanDefinition : beanDefinitions) {
                 registerBean(beanDefinition.getBeanName(), beanDefinition);

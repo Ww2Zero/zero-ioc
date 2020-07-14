@@ -6,7 +6,7 @@ package com.zero.ioc.beans.type;
 public interface TypeConverter {
 
     /**
-     * 将value转换为目标类型
+     * 将value转换为目标类型 targetType
      *
      * @param value
      * @param targetType
