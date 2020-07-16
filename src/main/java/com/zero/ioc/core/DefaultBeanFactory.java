@@ -11,9 +11,10 @@ import com.zero.ioc.utils.BeanUtils;
 import com.zero.ioc.utils.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -72,49 +73,36 @@ public class DefaultBeanFactory implements BeanFactory {
         List<PropertyArg> propertyArgList = beanDefinition.getPropertyArgList();
         if (propertyArgList != null && !propertyArgList.isEmpty()) {
             for (PropertyArg propertyArg : propertyArgList) {
-                Object value = propertyArg.getValue();
-                String name = propertyArg.getName();
-                String ref = propertyArg.getRef();
+                String propertyArgName = propertyArg.getName();
+                String propertyArgRef = propertyArg.getRef();
+                Object propertyArgValue = propertyArg.getValue();
                 Object injectValue = null;
-                if (value != null) {
-                    injectValue = value;
-                } else if (StringUtils.isNotEmpty(ref)) {
-                    injectValue = getBean(ref);
+                if (propertyArgValue != null) {
+                    injectValue = propertyArgValue;
+                } else if (StringUtils.isNotEmpty(propertyArgRef)) {
+                    injectValue = getBean(propertyArgRef);
                 }
-                setPropertyValue(bean, beanDefinition, name, injectValue);
+                setPropertyValue(bean, beanDefinition, propertyArgName, injectValue);
 
             }
         }
     }
 
     private void setPropertyValue(Object bean, BeanDefinition bd, String propertyName, Object injectValue) {
-        Class beanClass = null;
         try {
-            beanClass = Class.forName(bd.getClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        propertyName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-        // 默认采用set方法注入，bean必须实现setter方法
-        String propertySetMethodName = "set" + propertyName;
-        if (beanClass != null) {
-            for (Method method : beanClass.getMethods()) {
-                if (method.getName().equals(propertySetMethodName)) {
-                    Class<?>[] parameterTypes = method.getParameterTypes();
-                    if (parameterTypes.length == 1) {
-                        SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
-                        Object value = simpleTypeConverter.convertIfNecessary(injectValue, parameterTypes[0]);
-                        try {
-                            method.invoke(bean, value);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    }
+            BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
+            PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+            for (PropertyDescriptor pd : propertyDescriptors) {
+                if (propertyName.equals(pd.getName())) {
+                    SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
+                    Object value = simpleTypeConverter.convertIfNecessary(injectValue, pd.getPropertyType());
+                    pd.getWriteMethod().invoke(bean, value);
+                    break;
                 }
             }
+        } catch (Exception e) {
+            throw new BeanCreationException(String.format("failed to obtain BeanInfo for class[%s] on set [%s]", bd.getClassName(), propertyName), e);
         }
-
     }
 
     private Object createBean(BeanDefinition beanDefinition) throws Exception {
