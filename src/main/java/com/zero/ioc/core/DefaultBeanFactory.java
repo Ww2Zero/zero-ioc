@@ -89,12 +89,12 @@ public class DefaultBeanFactory implements BeanFactory {
     }
 
     private void setPropertyValue(Object bean, BeanDefinition bd, String propertyName, Object injectValue) {
+        SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
             PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
             for (PropertyDescriptor pd : propertyDescriptors) {
                 if (propertyName.equals(pd.getName())) {
-                    SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
                     Object value = simpleTypeConverter.convertIfNecessary(injectValue, pd.getPropertyType());
                     pd.getWriteMethod().invoke(bean, value);
                     break;
